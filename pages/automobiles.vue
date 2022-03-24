@@ -11,8 +11,8 @@
 </template>
 
 <script>
-  import ITCard from '@/components/it/itCard.vue'
-  import AddITCard from '@/components/it/addItCard.vue'
+  import ITCard from '@/components/automobiles/autoCard.vue'
+  import AddITCard from '@/components/automobiles/additCard.vue'
   import LoadingCardDialog from '@/components/helpers/loadingCardDialog.vue'
   export default {
     components: {
