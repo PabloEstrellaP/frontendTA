@@ -127,7 +127,7 @@ export default {
   },
   mounted(){
     if(process.browser){
-      localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDc0MDUxNTYsImV4cCI6MTY0NzQ5MTU1Nn0.tipDYJVwbDo31lHUowU_tsy7gWnSOG1dKZwDf9sXQiU')
+      localStorage.setItem('token', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDY2NzVlODdjYzUyZWJhZGYwOWRkNiIsImlhdCI6MTY0ODc4NDI3MSwiZXhwIjoxNjQ4ODcwNjcxfQ.slLejfcwtSLdAo3F61cFNbGzB3-IyD8G8cvLNmcJ9Mc")
     }
   }
 }
