@@ -21,7 +21,7 @@
           type="text"
           maxlength="40"
           v-model="Smotor"
-          :rules="validations.Smotor"
+          :rules="validations.SmotorRules"
         ></v-text-field>
         <v-textarea
           label="Descripción"
@@ -52,7 +52,7 @@
           type="text"
           maxlength="20"
           v-model="placas"
-          :rules="validations.placas"
+          :rules="validations.PlacasRules"
         ></v-text-field>
         <v-text-field
           label="Responsable"
@@ -124,8 +124,16 @@
             (v) => !!v || 'Descripción es requerido',
             (v) => (!!v && v.length <= 100) || "Descripción debe ser menor a 100 caracteres",
           ],
+            SmotorRules: [
+            (v) => !!v || 'Serie del motor es requerido es requerido',
+            (v) => (!!v && v.length <= 20) || "Serial debe ser menor a 20 caracteres",
+          ],
           serialRules: [
             (v) => !!v || 'Serial es requerido',
+            (v) => (!!v && v.length <= 20) || "Serial debe ser menor a 20 caracteres",
+          ],
+           PlacasRules: [
+            (v) => !!v || 'Placas es requerido',
             (v) => (!!v && v.length <= 20) || "Serial debe ser menor a 20 caracteres",
           ],
           responsableNameRules: [
