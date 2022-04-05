@@ -20,7 +20,7 @@
           counter
           type="text"
           maxlength="40"
-          v-model="Smotor"
+          v-model="motorSerial"
           :rules="validations.SmotorRules"
         ></v-text-field>
         <v-textarea
@@ -45,7 +45,7 @@
         ></v-text-field>
 
          <v-text-field
-          label="Placas"
+          label="Plaque"
           outlined
           dense
           counter
@@ -91,7 +91,7 @@
 </template>
 
 <script>
-  import { translateErrorIT } from '@/static/translateErrors.js'
+  import { translateErrorAutos } from '@/static/translateErrors.js'
   import ErrorDialog from '@/components/helpers/errorDialog.vue'
   export default {
     components: {
@@ -107,9 +107,10 @@
 
         isEdit: false,
         model: null,
-        cost: null,
+        motorSerial: null,
         description: null,
         serial: null,
+        plaque: null,
         responsableName: null,
         id: null,
         validations: {
@@ -144,47 +145,49 @@
       }
     },
     methods: {
-      getIt(data) {
+      getautomobiles(data) {
         this.isEdit = true
         this.model = data.model
-        this.cost = data.cost
+        this.motorSerial = data.motorSerial
         this.description = data.description
         this.serial = data.serial
+        this.plaque= data.plaque
         this.responsableName = data.responsableName
         this.id = data._id
       },
-      async addIt() {
+      async addautomobiles() {
         try {
           this.addDialog = false
           this.$parent.openDialog()
 
           const body = {
             model: this.model,
-            cost: this.cost,
+            motorSerial: this.motorSerial,
             description: this.description,
             serial: this.serial,
+            plaque: this.plaque,
             responsableName: this.responsableName
           }
           let data = null
           if(this.isEdit){
-            data = await this.$axios.$put('/it/' + this.id, body, {
+            data = await this.$axios.$put('/automobiles/' + this.id, body, {
               headers: { token: localStorage.token }
             })
           } else {
-            data = await this.$axios.$post('/it', body, {
+            data = await this.$axios.$post('/automobiles', body, {
               headers: { token: localStorage.token }
             })  
           }
           
           if(data.ok){
             this.cleanForm()
-            await this.$parent.getIt()
+            await this.$parent.getautomobiles()
             this.$parent.closeDialog()
           }
         } catch (error) {
           console.log(error)
           this.$parent.closeDialog()
-          this.errorDescription = translateErrorIT(error?.response?.data?.msg)
+          this.errorDescription = translateErrorAutos(error?.response?.data?.msg)
           this.$refs.errorDialog.openDialog()
         }
       },
