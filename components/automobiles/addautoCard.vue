@@ -1,4 +1,4 @@
-<template>
+<template v-slot:activator="{ on, attrs }" >
   <v-card class="ma-5">
     <v-card-title></v-card-title>
     <v-card-text>
@@ -64,6 +64,36 @@
           v-model="responsableName"
           :rules="validations.responsableNameRules"
         ></v-text-field>
+         
+  <div>
+    
+    <v-menu
+      ref="menu"
+      v-model="menu"
+      :close-on-content-click="false"
+      transition="scale-transition"
+      offset-y
+      min-width="auto"
+    >
+      <template v-slot:activator="{ on, attrs }">
+        <v-text-field
+          v-model="date"
+          label="Fecha de adquisicion"
+          prepend-icon="mdi-calendar"
+          readonly
+          v-bind="attrs"
+          v-on="on"
+        ></v-text-field>
+      </template>
+      <v-date-picker
+        v-model="date"
+        :max="(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)"
+        min="1950-01-01"
+        @change="save"
+      ></v-date-picker>
+    </v-menu>
+  </div>
+  
       </v-form>
       <v-col>
         <v-btn block class="info" @click="cleanForm()">Limpiar</v-btn>
@@ -80,7 +110,7 @@
           <v-card-text>
               <v-layout row wrap>
                   <v-spacer />
-                  <v-btn color="primary" class="mr-3" @click="addIt()">Aceptar</v-btn>
+                  <v-btn color="primary" class="mr-3" @click="addautomobiles()">Aceptar</v-btn>
                   <v-btn color="secondary" @click="addDialog = false">Cancelar</v-btn>
               </v-layout>
           </v-card-text>
@@ -170,11 +200,11 @@
           }
           let data = null
           if(this.isEdit){
-            data = await this.$axios.$put('/automobiles/' + this.id, body, {
+            data = await this.$axios.$put('/automobile/' + this.id, body, {
               headers: { token: localStorage.token }
             })
           } else {
-            data = await this.$axios.$post('/automobiles', body, {
+            data = await this.$axios.$post('/automobile', body, {
               headers: { token: localStorage.token }
             })  
           }
@@ -204,10 +234,14 @@
       cleanForm() {
         this.$refs.form.reset()
         this.$parent.it = null
-      }
+      },
+      save (date) {
+        this.$refs.menu.save(date)
+      },
     }
   }
 </script>
+
 
 <style>
 
