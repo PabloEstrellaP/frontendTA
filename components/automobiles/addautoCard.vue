@@ -134,7 +134,7 @@
         editDescription: '¿Está seguro de actualizar la información?',
         errorTitle: 'Ha ocurrido un error',
         errorDescription: null,
-
+        menu:null,
         isEdit: false,
         model: null,
         motorSerial: null,
@@ -142,6 +142,7 @@
         serial: null,
         plaque: null,
         responsableName: null,
+        date:null,
         id: null,
         validations: {
           modelRules: [
