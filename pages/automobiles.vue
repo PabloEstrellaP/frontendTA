@@ -1,10 +1,10 @@
 <template>
   <v-layout row wrap :class="isLoading ? 'isHiden' : ''">
     <v-flex xs12 md4>
-      <AddITCard ref="addautoCard"/>
+      <AddautoCard ref="addautoCard"/>
     </v-flex>
     <v-flex xs12 md8>
-      <ITCard ref="autoCard" />
+      <AutoCard ref="autoCard" />
     </v-flex>
     <LoadingCardDialog ref="loadingCardDialog" />
   </v-layout>
