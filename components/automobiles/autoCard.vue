@@ -47,9 +47,9 @@
       }
     },
     methods: {
-      async getIt() {
+      async getautomobiles() {
         try {
-          const data = await this.$axios.$get('/it', {
+          const data = await this.$axios.$get('/automobiles', {
             headers: { token: localStorage.getItem('token') }
           })
           this.its = data.msg

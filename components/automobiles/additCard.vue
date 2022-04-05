@@ -45,13 +45,13 @@
         ></v-text-field>
 
          <v-text-field
-          label="Plaque"
+          label="Placas"
           outlined
           dense
           counter
           type="text"
           maxlength="20"
-          v-model="placas"
+          v-model="plaque"
           :rules="validations.PlacasRules"
         ></v-text-field>
         <v-text-field

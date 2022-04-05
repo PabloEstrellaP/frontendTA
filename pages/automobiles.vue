@@ -11,13 +11,13 @@
 </template>
 
 <script>
-  import ITCard from '@/components/automobiles/autoCard.vue'
-  import AddITCard from '@/components/automobiles/additCard.vue'
+  import autoCard from '@/components/automobiles/autoCard.vue'
+  import additCard from '@/components/automobiles/additCard.vue'
   import LoadingCardDialog from '@/components/helpers/loadingCardDialog.vue'
   export default {
     components: {
-      ITCard,
-      AddITCard,
+     autoCard,
+      additCard,
       LoadingCardDialog
     },
     data() {
@@ -27,7 +27,7 @@
       }
     },
     methods: {
-      async getIt() {
+      async getautomobiles() {
         await this.$refs.iTCard.getIt()
       },
       openDialog() {
@@ -40,7 +40,7 @@
     async mounted() {
       if(process.browser){
         this.openDialog()
-        await this.getIt()
+        await this.getautomobiles()
         this.closeDialog()
         this.isLoading = false
       }
@@ -48,7 +48,7 @@
     watch: {
       it(newvalue) {
         if(newvalue){
-          this.$refs.addITCard.getIt(newvalue)
+          this.$refs.addITCard.getautomobiles(newvalue)
         }else {
           this.$refs.addITCard.$refs.form.reset()
         }
