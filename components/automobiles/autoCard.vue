@@ -43,7 +43,7 @@
 
           { text: "Actions", align: "center", value: "action", sortable: false }
         ],
-        its: [],
+        automobiles: [],
       }
     },
     methods: {
