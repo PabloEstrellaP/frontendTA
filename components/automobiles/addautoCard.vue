@@ -77,7 +77,7 @@
     >
       <template v-slot:activator="{ on, attrs }">
         <v-text-field
-          v-model="date"
+          v-model="originalDate"
           label="Fecha de adquisicion"
           prepend-icon="mdi-calendar"
           readonly
@@ -86,7 +86,7 @@
         ></v-text-field>
       </template>
       <v-date-picker
-        v-model="date"
+        v-model="originalDate"
         :max="(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)"
         min="1950-01-01"
         @change="save"
@@ -142,7 +142,7 @@
         serial: null,
         plaque: null,
         responsableName: null,
-        date:null,
+        originalDate:null,
         id: null,
         validations: {
           modelRules: [
@@ -184,6 +184,7 @@
         this.serial = data.serial
         this.plaque= data.plaque
         this.responsableName = data.responsableName
+        this.originalDate=data.originalDate
         this.id = data._id
       },
       async addautomobiles() {
@@ -197,7 +198,8 @@
             description: this.description,
             serial: this.serial,
             plaque: this.plaque,
-            responsableName: this.responsableName
+            responsableName: this.responsableName,
+            originalDate:this.originalDate
           }
           let data = null
           if(this.isEdit){
