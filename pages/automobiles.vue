@@ -1,10 +1,10 @@
 <template>
   <v-layout row wrap :class="isLoading ? 'isHiden' : ''">
     <v-flex xs12 md4>
-      <AddITCard ref="addITCard"/>
+      <AddITCard ref="addautoCard"/>
     </v-flex>
     <v-flex xs12 md8>
-      <ITCard ref="iTCard" />
+      <ITCard ref="autoCard" />
     </v-flex>
     <LoadingCardDialog ref="loadingCardDialog" />
   </v-layout>
@@ -12,12 +12,12 @@
 
 <script>
   import autoCard from '@/components/automobiles/autoCard.vue'
-  import additCard from '@/components/automobiles/additCard.vue'
+  import addautoCard from '~/components/automobiles/addautoCard.vue'
   import LoadingCardDialog from '@/components/helpers/loadingCardDialog.vue'
   export default {
     components: {
      autoCard,
-      additCard,
+      addautoCard,
       LoadingCardDialog
     },
     data() {
@@ -28,7 +28,7 @@
     },
     methods: {
       async getautomobiles() {
-        await this.$refs.iTCard.getIt()
+        await this.$refs.autoCard.getautomobiles()
       },
       openDialog() {
         this.$refs.loadingCardDialog.openDialog()
@@ -48,9 +48,9 @@
     watch: {
       it(newvalue) {
         if(newvalue){
-          this.$refs.addITCard.getautomobiles(newvalue)
+          this.$refs.addautoCard.getautomobiles(newvalue)
         }else {
-          this.$refs.addITCard.$refs.form.reset()
+          this.$refs.addautoCard.$refs.form.reset()
         }
       }
     }
