@@ -10,11 +10,19 @@ export const translateErrorIT = ( error ) => {
 }
 export const translateErrorAutos =(error)=>{
     switch (error) {
-        case 'serial is used':
+        case 'plaque, motorSerial, serial are used':
             
-            return 'Serial esta en uso'
+            return 'La placa, serial del motor, serial esta en uso'
     
         default:
             return 'Localice un administrador'
+    }
+}
+export const translateErrorHS=(error)=>{
+    switch(error){
+        case 'serial is used':
+        return 'serial esta en uso'
+        default:
+            return'Localice un administrador'
     }
 }
