@@ -1,10 +1,10 @@
 <template>
   <v-layout row wrap :class="isLoading ? 'isHiden' : ''">
     <v-flex xs12 md4>
-      <AddautoCard ref="addautoCard"/>
+      <addautoCard ref="addautoCard"/>
     </v-flex>
     <v-flex xs12 md8>
-      <AutoCard ref="autoCard" />
+      <autoCard ref="autoCard"/>
     </v-flex>
     <LoadingCardDialog ref="loadingCardDialog" />
   </v-layout>
@@ -12,13 +12,13 @@
 
 <script>
   import autoCard from '@/components/automobiles/autoCard.vue'
-  import addautoCard from '~/components/automobiles/addautoCard.vue'
+  import addautoCard from '@/components/automobiles/addautoCard.vue'
   import LoadingCardDialog from '@/components/helpers/loadingCardDialog.vue'
   export default {
     components: {
-     autoCard,
-      addautoCard,
-      LoadingCardDialog
+    autoCard,
+    addautoCard,
+    LoadingCardDialog
     },
     data() {
       return {
