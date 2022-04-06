@@ -59,7 +59,7 @@
           <v-card-text>
               <v-layout row wrap>
                   <v-spacer />
-                  <v-btn color="primary" class="mr-3" @click="addIt()">Aceptar</v-btn>
+                  <v-btn color="primary" class="mr-3" @click="addhs()">Aceptar</v-btn>
                   <v-btn color="secondary" @click="addDialog = false">Cancelar</v-btn>
               </v-layout>
           </v-card-text>
@@ -115,7 +115,7 @@
       }
     },
     methods: {
-      getIt(data) {
+      geths(data) {
         this.isEdit = true
         this.model = data.model
         this.cost = data.cost
@@ -124,7 +124,7 @@
         this.responsableName = data.responsableName
         this.id = data._id
       },
-      async addIt() {
+      async addhs() {
         try {
           this.addDialog = false
           this.$parent.openDialog()
@@ -138,18 +138,18 @@
           }
           let data = null
           if(this.isEdit){
-            data = await this.$axios.$put('/it/' + this.id, body, {
+            data = await this.$axios.$put('/housingSector/' + this.id, body, {
               headers: { token: localStorage.token }
             })
           } else {
-            data = await this.$axios.$post('/it', body, {
+            data = await this.$axios.$post('/housingSector', body, {
               headers: { token: localStorage.token }
             })  
           }
           
           if(data.ok){
             this.cleanForm()
-            await this.$parent.getIt()
+            await this.$parent.geths()
             this.$parent.closeDialog()
           }
         } catch (error) {
@@ -171,7 +171,7 @@
       },
       cleanForm() {
         this.$refs.form.reset()
-        this.$parent.it = null
+        this.$parent.hs = null
       }
     }
   }

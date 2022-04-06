@@ -10,7 +10,7 @@
               <template v-slot:[`item.action`]="{ item }">
                 <v-icon
                   class="mr-2"
-                  @click="setIt(item)"
+                  @click="seths(item)"
                   >mdi-pencil</v-icon
                 >
                 <v-icon
@@ -43,9 +43,9 @@
       }
     },
     methods: {
-      async getIt() {
+      async geths() {
         try {
-          const data = await this.$axios.$get('/it', {
+          const data = await this.$axios.$get('/housingSector', {
             headers: { token: localStorage.getItem('token') }
           })
           this.its = data.msg
@@ -57,8 +57,8 @@
         this.$refs.deleteCardDialog.openDialog(item)
       },
       setIt(data) {
-        this.$parent.it = data
-        console.log(this.$parent.it)
+        this.$parent.hs = data
+        console.log(this.$parent.hs)
       }
     }
   }
