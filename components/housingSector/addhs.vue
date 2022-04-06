@@ -43,6 +43,38 @@
           v-model="responsableName"
           :rules="validations.responsableNameRules"
         ></v-text-field>
+
+
+       <div>
+    
+    <v-menu
+      ref="menu"
+      v-model="menu"
+      :close-on-content-click="false"
+      transition="scale-transition"
+      offset-y
+      min-width="auto"
+    >
+      <template v-slot:activator="{ on, attrs }">
+        <v-text-field
+          v-model="originalDate"
+          label="Fecha de adquisicion"
+          prepend-icon="mdi-calendar"
+          readonly
+          v-bind="attrs"
+          v-on="on"
+        ></v-text-field>
+      </template>
+      <v-date-picker
+        v-model="originalDate"
+        :max="(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)"
+        min="1950-01-01"
+        @change="save"
+      ></v-date-picker>
+    </v-menu>
+  </div>
+
+
       </v-form>
       <v-col>
         <v-btn block class="info" @click="cleanForm()">Limpiar</v-btn>
@@ -83,13 +115,14 @@
         editDescription: '¿Está seguro de actualizar la información?',
         errorTitle: 'Ha ocurrido un error',
         errorDescription: null,
-
+         menu:null,
         isEdit: false,
         model: null,
         cost: null,
         description: null,
         serial: null,
         responsableName: null,
+        originalDate:null,
         id: null,
         validations: {
           modelRules: [
@@ -122,6 +155,7 @@
         this.description = data.description
         this.serial = data.serial
         this.responsableName = data.responsableName
+        this.originalDate=data.originalDate
         this.id = data._id
       },
       async addhs() {
@@ -172,7 +206,10 @@
       cleanForm() {
         this.$refs.form.reset()
         this.$parent.hs = null
-      }
+      },
+       save (date) {
+        this.$refs.menu.save(date)
+      },
     }
   }
 </script>
