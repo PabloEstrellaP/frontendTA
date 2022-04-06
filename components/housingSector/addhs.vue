@@ -118,11 +118,11 @@
          menu:null,
         isEdit: false,
         model: null,
-        cost: null,
-        description: null,
-        serial: null,
-        responsableName: null,
-        originalDate:null,
+         cost: null,
+         description: null,
+         serial: null,
+         responsableName: null,
+         originalDate:null,
         id: null,
         validations: {
           modelRules: [
@@ -168,7 +168,8 @@
             cost: this.cost,
             description: this.description,
             serial: this.serial,
-            responsableName: this.responsableName
+            responsableName: this.responsableName,
+             originalDate:this.originalDate
           }
           let data = null
           if(this.isEdit){

@@ -7,7 +7,7 @@
             <v-card-text>
                 <v-layout row wrap>
                     <v-spacer />
-                    <v-btn color="primary" class="mr-3" @click="deleteIt()">Aceptar</v-btn>
+                    <v-btn color="primary" class="mr-3" @click="deleteautomobiles()">Aceptar</v-btn>
                     <v-btn color="secondary" @click="dialog = false">Cancelar</v-btn>
                 </v-layout>
             </v-card-text>

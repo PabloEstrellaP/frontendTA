@@ -16,7 +16,7 @@
   import LoadingCardDialog from '@/components/helpers/loadingCardDialog.vue'
   export default {
     components: {
-     hsCard,
+      hsCard,
       Addhs,
       LoadingCardDialog
     },
@@ -48,9 +48,9 @@
     watch: {
       it(newvalue) {
         if(newvalue){
-          this.$refs.addITCard.geths(newvalue)
+          this.$refs.Addhs.geths(newvalue)
         }else {
-          this.$refs.addITCard.$refs.form.reset()
+          this.$refs.Addhs.$refs.form.reset()
         }
       }
     }
