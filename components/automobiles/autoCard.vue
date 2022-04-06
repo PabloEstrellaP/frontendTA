@@ -4,7 +4,7 @@
       <v-card-text>
          <v-data-table
               :headers="headers"
-              :items="its"
+              :items="automobiles"
               :items-per-page="5"
             >
               <template v-slot:[`item.action`]="{ item }">
@@ -42,7 +42,7 @@
           { text: "Fecha", value: "Fecha", align: "center" },
           { text: "Actions", align: "center", value: "action", sortable: false }
         ],
-        its: [],
+        automobiles: [],
       }
     },
     methods: {
@@ -51,7 +51,7 @@
           const data = await this.$axios.$get('/automobile', {
             headers: { token: localStorage.getItem('token') }
           })
-          this.its = data.msg
+          this.automobiles = data.msg
         } catch (error) {
           console.log(error.response)
         }
