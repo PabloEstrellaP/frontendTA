@@ -4,7 +4,7 @@
       <v-card-text>
          <v-data-table
               :headers="headers"
-              :items="automobiles"
+              :items="its"
               :items-per-page="5"
             >
               <template v-slot:[`item.action`]="{ item }">
@@ -42,7 +42,7 @@
           { text: "Fecha", value: "Fecha", align: "center" },
           { text: "Actions", align: "center", value: "action", sortable: false }
         ],
-        automobiles: [],
+        its: [],
       }
     },
     methods: {

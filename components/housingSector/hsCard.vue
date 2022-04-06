@@ -26,7 +26,7 @@
 </template>
 
 <script>
-  import DeleteCardDialog from '@/components/it/deleteCardDialog.vue'
+  import DeleteCardDialog from '@/components/housingSector/deleteCardDialog.vue'
   export default {
     components: {
       DeleteCardDialog
