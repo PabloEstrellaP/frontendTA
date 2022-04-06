@@ -70,7 +70,7 @@
 </template>
 
 <script>
-  import { translateErrorIT } from '@/static/translateErrors.js'
+  import { translateErrorHS, } from '@/static/translateErrors.js'
   import ErrorDialog from '@/components/helpers/errorDialog.vue'
   export default {
     components: {
@@ -155,7 +155,7 @@
         } catch (error) {
           console.log(error)
           this.$parent.closeDialog()
-          this.errorDescription = translateErrorIT(error?.response?.data?.msg)
+          this.errorDescription = translateErrorHS(error?.response?.data?.msg)
           this.$refs.errorDialog.openDialog()
         }
       },
