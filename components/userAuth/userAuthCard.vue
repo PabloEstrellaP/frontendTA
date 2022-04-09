@@ -1,16 +1,16 @@
 <template>
   <v-card class="ma-5">
-      <v-card-title>Inmobilario</v-card-title>
+      <v-card-title>Informática</v-card-title>
       <v-card-text>
          <v-data-table
               :headers="headers"
-              :items="its"
+              :items="usersAuth"
               :items-per-page="5"
             >
               <template v-slot:[`item.action`]="{ item }">
                 <v-icon
                   class="mr-2"
-                  @click="setIt(item)"
+                  @click="setUserAuth(item)"
                   >mdi-pencil</v-icon
                 >
                 <v-icon
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-  import DeleteCardDialog from '@/components/it/deleteCardDialog.vue'
+  import DeleteCardDialog from '@/components/userAuth/deleteCardUserAuthDialog.vue'
   export default {
     components: {
       DeleteCardDialog
@@ -34,21 +34,24 @@
     data() {
       return {
         headers: [
-          { text: "Serie", value: "serial", align: "center" },
-          { text: "Descripción", value: "description", align: "center" },
-          { text: "Responsable", value: "responsableName", align: "center" },
+          { text: "Usuario", value: "userName", align: "center" },
+          { text: "Rol", value: "rol.name", align: "center" },
+          { text: "Correo", value: "personalData.email", align: "center" },
+          { text: "Nombre", value: "personalData.name", align: "center" },
+          { text: "Apellido", value: "personalData.lastName", align: "center" },
+          { text: "Teléfono", value: "personalData.phone", align: "center" },
           { text: "Actions", align: "center", value: "action", sortable: false }
         ],
-        its: [],
+        usersAuth: [],
       }
     },
     methods: {
-      async getIt() {
+      async getUserAuth() {
         try {
-          const data = await this.$axios.$get('/housingSector/', {
+          const data = await this.$axios.$get('/userAuth', {
             headers: { token: localStorage.getItem('token') }
           })
-          this.its = data.msg
+          this.usersAuth = data.msg
         } catch (error) {
           console.log(error.response)
         }
@@ -56,9 +59,9 @@
       openDialog(item) {
         this.$refs.deleteCardDialog.openDialog(item)
       },
-      setIt(data) {
-        this.$parent.it = data
-        console.log(this.$parent.it)
+      setUserAuth(data) {
+        this.$parent.userAuth = data
+        this.$parent.user = data
       }
     }
   }

@@ -117,6 +117,11 @@ export default {
           icon: 'mdi-car',
           title: 'Automóviles',
           to: '/automobiles'
+        },
+        {
+          icon: 'mdi-account-circle',
+          title: 'Usuarios',
+          to: '/user'
         }
       ],
       miniVariant: false,
@@ -127,7 +132,7 @@ export default {
   },
   mounted(){
     if(process.browser){
-      localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NDc0MDUxNTYsImV4cCI6MTY0NzQ5MTU1Nn0.tipDYJVwbDo31lHUowU_tsy7gWnSOG1dKZwDf9sXQiU')
+      localStorage.setItem('token', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDY2NzVlODdjYzUyZWJhZGYwOWRkNiIsImlhdCI6MTY0OTUwODE5NywiZXhwIjoxNjQ5NTk0NTk3fQ.jLMoDw2wa4ik2n3kbcczx6bzn3g1aSGQTUAYxiMHN6k")
     }
   }
 }
