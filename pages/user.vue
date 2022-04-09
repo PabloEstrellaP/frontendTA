@@ -5,11 +5,20 @@
         <v-toolbar color="primary">
           <v-toolbar-title>Usuarios</v-toolbar-title>
           <v-spacer />
-          <v-btn class="info" @click="cleanForm()">Limpiar</v-btn>
-          <v-btn v-if="isEdit" class="error ml-1" @click="cancelEdit()">Cancelar</v-btn>
-          <v-btn class="success ml-1" @click="validate()">{{ isEdit ? 'Editar' : 'Agregar' }}</v-btn>
+          <div class="hidden-sm-and-down">
+            <v-btn class="info" @click="cleanForm()">Limpiar</v-btn>
+            <v-btn v-if="isEdit" class="error ml-1" @click="cancelEdit()">Cancelar</v-btn>
+            <v-btn class="success ml-1" @click="validate()">{{ isEdit ? 'Editar' : 'Agregar' }}</v-btn>
+          </div>
         </v-toolbar>
       </v-card-title>
+      <v-card-text class="hidden-sm-and-up">
+        <v-col>
+            <v-btn block class="info" @click="cleanForm()">Limpiar</v-btn>
+            <v-btn block v-if="isEdit" class="error mt-1" @click="cancelEdit()">Cancelar</v-btn>
+            <v-btn block class="success mt-1" @click="validate()">{{ isEdit ? 'Editar' : 'Agregar' }}</v-btn>
+        </v-col>
+      </v-card-text>
     </v-card>
     <v-layout row wrap :class="isLoading ? 'isHiden' : ''">
       <v-flex xs12 md6>
