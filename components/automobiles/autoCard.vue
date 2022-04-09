@@ -4,13 +4,13 @@
       <v-card-text>
          <v-data-table
               :headers="headers"
-              :items="its"
+              :items="automobiles"
               :items-per-page="5"
             >
               <template v-slot:[`item.action`]="{ item }">
                 <v-icon
                   class="mr-2"
-                  @click="setIt(item)"
+                  @click="setautomobiles(item)"
                   >mdi-pencil</v-icon
                 >
                 <v-icon
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-  import DeleteCardDialog from '@/components/it/deleteCardDialog.vue'
+  import DeleteCardDialog from '@/components/automobiles/deleteCardDialog.vue'
   export default {
     components: {
       DeleteCardDialog
@@ -39,20 +39,19 @@
           { text: "SerieMotor", value: "responsableName", align: "center" },
           { text: "Placas", value: "responsableName", align: "center" },
           { text: "Responsable", value: "responsableName", align: "center" },
-
-
+          { text: "Fecha", value: "Fecha", align: "center" },
           { text: "Actions", align: "center", value: "action", sortable: false }
         ],
-        its: [],
+        automobiles: [],
       }
     },
     methods: {
-      async getIt() {
+      async getautomobiles() {
         try {
-          const data = await this.$axios.$get('/it', {
+          const data = await this.$axios.$get('/automobile', {
             headers: { token: localStorage.getItem('token') }
           })
-          this.its = data.msg
+          this.automobiles = data.msg
         } catch (error) {
           console.log(error.response)
         }
@@ -60,9 +59,9 @@
       openDialog(item) {
         this.$refs.deleteCardDialog.openDialog(item)
       },
-      setIt(data) {
-        this.$parent.it = data
-        console.log(this.$parent.it)
+      setautomobiles(data) {
+        this.$parent.automobiles = data
+        console.log(this.$parent.automobiles)
       }
     }
   }

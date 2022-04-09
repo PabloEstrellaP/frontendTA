@@ -135,5 +135,7 @@ export default {
       localStorage.setItem('token', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDY2NzVlODdjYzUyZWJhZGYwOWRkNiIsImlhdCI6MTY0OTUwODE5NywiZXhwIjoxNjQ5NTk0NTk3fQ.jLMoDw2wa4ik2n3kbcczx6bzn3g1aSGQTUAYxiMHN6k")
     }
   }
+  
 }
 </script>
+

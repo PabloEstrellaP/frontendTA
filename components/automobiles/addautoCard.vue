@@ -1,4 +1,4 @@
-<template>
+<template v-slot:activator="{ on, attrs }" >
   <v-card class="ma-5">
     <v-card-title></v-card-title>
     <v-card-text>
@@ -20,8 +20,8 @@
           counter
           type="text"
           maxlength="40"
-          v-model="Smotor"
-          :rules="validations.Smotor"
+          v-model="motorSerial"
+          :rules="validations.SmotorRules"
         ></v-text-field>
         <v-textarea
           label="Descripción"
@@ -51,8 +51,8 @@
           counter
           type="text"
           maxlength="20"
-          v-model="placas"
-          :rules="validations.placas"
+          v-model="plaque"
+          :rules="validations.PlacasRules"
         ></v-text-field>
         <v-text-field
           label="Responsable"
@@ -64,6 +64,36 @@
           v-model="responsableName"
           :rules="validations.responsableNameRules"
         ></v-text-field>
+         
+  <div>
+    
+    <v-menu
+      ref="menu"
+      v-model="menu"
+      :close-on-content-click="false"
+      transition="scale-transition"
+      offset-y
+      min-width="auto"
+    >
+      <template v-slot:activator="{ on, attrs }">
+        <v-text-field
+          v-model="originalDate"
+          label="Fecha de adquisicion"
+          prepend-icon="mdi-calendar"
+          readonly
+          v-bind="attrs"
+          v-on="on"
+        ></v-text-field>
+      </template>
+      <v-date-picker
+        v-model="originalDate"
+        :max="(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)"
+        min="1950-01-01"
+        @change="save"
+      ></v-date-picker>
+    </v-menu>
+  </div>
+  
       </v-form>
       <v-col>
         <v-btn block class="info" @click="cleanForm()">Limpiar</v-btn>
@@ -80,7 +110,7 @@
           <v-card-text>
               <v-layout row wrap>
                   <v-spacer />
-                  <v-btn color="primary" class="mr-3" @click="addIt()">Aceptar</v-btn>
+                  <v-btn color="primary" class="mr-3" @click="addautomobiles()">Aceptar</v-btn>
                   <v-btn color="secondary" @click="addDialog = false">Cancelar</v-btn>
               </v-layout>
           </v-card-text>
@@ -91,7 +121,7 @@
 </template>
 
 <script>
-  import { translateErrorIT } from '@/static/translateErrors.js'
+  import { translateErrorAutomobile } from '@/static/translateErrors.js'
   import ErrorDialog from '@/components/helpers/errorDialog.vue'
   export default {
     components: {
@@ -104,13 +134,15 @@
         editDescription: '¿Está seguro de actualizar la información?',
         errorTitle: 'Ha ocurrido un error',
         errorDescription: null,
-
+        menu:null,
         isEdit: false,
         model: null,
-        cost: null,
+        motorSerial: null,
         description: null,
         serial: null,
+        plaque: null,
         responsableName: null,
+        originalDate:null,
         id: null,
         validations: {
           modelRules: [
@@ -124,8 +156,16 @@
             (v) => !!v || 'Descripción es requerido',
             (v) => (!!v && v.length <= 100) || "Descripción debe ser menor a 100 caracteres",
           ],
+            SmotorRules: [
+            (v) => !!v || 'Serie del motor es requerido es requerido',
+            (v) => (!!v && v.length <= 20) || "Serial debe ser menor a 20 caracteres",
+          ],
           serialRules: [
             (v) => !!v || 'Serial es requerido',
+            (v) => (!!v && v.length <= 20) || "Serial debe ser menor a 20 caracteres",
+          ],
+           PlacasRules: [
+            (v) => !!v || 'Placas es requerido',
             (v) => (!!v && v.length <= 20) || "Serial debe ser menor a 20 caracteres",
           ],
           responsableNameRules: [
@@ -136,47 +176,51 @@
       }
     },
     methods: {
-      getIt(data) {
+      getautomobiles(data) {
         this.isEdit = true
         this.model = data.model
-        this.cost = data.cost
+        this.motorSerial = data.motorSerial
         this.description = data.description
         this.serial = data.serial
+        this.plaque= data.plaque
         this.responsableName = data.responsableName
+        this.originalDate=data.originalDate
         this.id = data._id
       },
-      async addIt() {
+      async addautomobiles() {
         try {
           this.addDialog = false
           this.$parent.openDialog()
 
           const body = {
             model: this.model,
-            cost: this.cost,
+            motorSerial: this.motorSerial,
             description: this.description,
             serial: this.serial,
-            responsableName: this.responsableName
+            plaque: this.plaque,
+            responsableName: this.responsableName,
+            originalDate:this.originalDate
           }
           let data = null
           if(this.isEdit){
-            data = await this.$axios.$put('/it/' + this.id, body, {
+            data = await this.$axios.$put('/automobile/' + this.id, body, {
               headers: { token: localStorage.token }
             })
           } else {
-            data = await this.$axios.$post('/it', body, {
+            data = await this.$axios.$post('/automobile', body, {
               headers: { token: localStorage.token }
             })  
           }
           
           if(data.ok){
             this.cleanForm()
-            await this.$parent.getIt()
+            await this.$parent.getautomobiles()
             this.$parent.closeDialog()
           }
         } catch (error) {
           console.log(error)
           this.$parent.closeDialog()
-          this.errorDescription = translateErrorIT(error?.response?.data?.msg)
+          this.errorDescription = translateErrorAutomobile(error?.response?.data?.msg)
           this.$refs.errorDialog.openDialog()
         }
       },
@@ -193,10 +237,14 @@
       cleanForm() {
         this.$refs.form.reset()
         this.$parent.it = null
-      }
+      },
+      save (date) {
+        this.$refs.menu.save(date)
+      },
     }
   }
 </script>
+
 
 <style>
 

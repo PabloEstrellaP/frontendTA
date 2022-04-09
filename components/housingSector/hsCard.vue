@@ -4,13 +4,13 @@
       <v-card-text>
          <v-data-table
               :headers="headers"
-              :items="its"
+              :items="hs"
               :items-per-page="5"
             >
               <template v-slot:[`item.action`]="{ item }">
                 <v-icon
                   class="mr-2"
-                  @click="setIt(item)"
+                  @click="seths(item)"
                   >mdi-pencil</v-icon
                 >
                 <v-icon
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-  import DeleteCardDialog from '@/components/it/deleteCardDialog.vue'
+  import DeleteCardDialog from '@/components/housingSector/deleteCardDialog.vue'
   export default {
     components: {
       DeleteCardDialog
@@ -39,16 +39,16 @@
           { text: "Responsable", value: "responsableName", align: "center" },
           { text: "Actions", align: "center", value: "action", sortable: false }
         ],
-        its: [],
+        hs: [],
       }
     },
     methods: {
-      async getIt() {
+      async geths() {
         try {
-          const data = await this.$axios.$get('/housingSector/', {
+          const data = await this.$axios.$get('/housingSector', {
             headers: { token: localStorage.getItem('token') }
           })
-          this.its = data.msg
+          this.hs = data.msg
         } catch (error) {
           console.log(error.response)
         }
@@ -57,8 +57,8 @@
         this.$refs.deleteCardDialog.openDialog(item)
       },
       setIt(data) {
-        this.$parent.it = data
-        console.log(this.$parent.it)
+        this.$parent.hs = data
+        console.log(this.$parent.hs)
       }
     }
   }
