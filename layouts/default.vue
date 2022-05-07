@@ -86,12 +86,22 @@
     >
       <span>&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
+    <Benchmark ref="benchmark" />
   </v-app>
 </template>
 
 <script>
+  import Benchmark from '@/components/benchmark.vue'
 export default {
+  components: {
+    Benchmark
+  },
   name: 'DefaultLayout',
+  watch: {
+    async $route(to, from){
+      await this.$refs.benchmark.renovateToken()
+    } 
+  },
   data () {
     return {
       clipped: true,
@@ -102,6 +112,11 @@ export default {
           icon: 'mdi-apps',
           title: 'Welcome',
           to: '/'
+        },
+        {
+          icon: 'mdi-home',
+          title: 'División',
+          to: '/division'
         },
         {
           icon: 'mdi-laptop',
@@ -129,13 +144,7 @@ export default {
       rightDrawer: false,
       title: 'Gobierno de Kanasín'
     }
-  },
-  mounted(){
-    if(process.browser){
-      localStorage.setItem('token', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDY2NzVlODdjYzUyZWJhZGYwOWRkNiIsImlhdCI6MTY0OTUwODE5NywiZXhwIjoxNjQ5NTk0NTk3fQ.jLMoDw2wa4ik2n3kbcczx6bzn3g1aSGQTUAYxiMHN6k")
-    }
-  }
-  
+  },  
 }
 </script>
 

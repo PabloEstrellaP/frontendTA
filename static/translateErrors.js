@@ -41,3 +41,12 @@ export const translateErrorHS = ( error ) => {
             return'Localice un administrador'
     }
 }
+
+export const translateErrorLogin = ( error ) => {
+    switch(error){
+        case "Credentials aren't corrects":
+        return 'Usuario no encontrado, intente de nuevo con nuevas credenciales'
+        default:
+            return'Localice un administrador'
+    }
+}

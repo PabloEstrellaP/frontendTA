@@ -19,7 +19,7 @@
                   >mdi-delete</v-icon
                 >
               </template>
-            </v-data-table>
+          </v-data-table>
       </v-card-text>
       <DeleteCardDialog ref="deleteCardDialog"/>
   </v-card>
