@@ -8,7 +8,9 @@
               :items-per-page="5"
             >
               <template v-slot:[`item.action`]="{ item }">
+                
                 <v-icon
+                
                   class="mr-2"
                   @click="setautomobiles(item)"
                   >mdi-pencil</v-icon
@@ -19,6 +21,13 @@
                   >mdi-delete</v-icon
                 >
               </template>
+             
+
+              <template v-slot:[`item.originalDate`]="{ item }">
+                
+               <span>{{ new Date(item.originalDate).toISOString().substr(0, 10) }}</span>
+              </template>
+
             </v-data-table>
       </v-card-text>
       <DeleteCardDialog ref="deleteCardDialog"/>
