@@ -46,7 +46,7 @@
       }
     },
     watch: {
-      it(newvalue) {
+      hs(newvalue) {
         if(newvalue){
           this.$refs.Addhs.geths(newvalue)
         }else {
