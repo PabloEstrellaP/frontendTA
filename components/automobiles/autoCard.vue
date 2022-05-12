@@ -39,7 +39,7 @@
           { text: "SerieMotor", value: "responsableName", align: "center" },
           { text: "Placas", value: "responsableName", align: "center" },
           { text: "Responsable", value: "responsableName", align: "center" },
-          { text: "Fecha", value: "Fecha", align: "center" },
+          { text: "Fecha", value: "originalDate", align: "center" },
           { text: "Actions", align: "center", value: "action", sortable: false }
         ],
         automobiles: [],

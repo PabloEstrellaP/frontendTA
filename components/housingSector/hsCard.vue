@@ -56,7 +56,7 @@
       openDialog(item) {
         this.$refs.deleteCardDialog.openDialog(item)
       },
-      setIt(data) {
+      seths(data) {
         this.$parent.hs = data
         console.log(this.$parent.hs)
       }
