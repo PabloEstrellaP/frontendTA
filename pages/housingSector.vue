@@ -4,7 +4,7 @@
       <addhs ref="addhs"/>
     </v-flex>
     <v-flex xs12 md8>
-      <hsCard ref="hsCard" />
+      <hsCard ref="hsCard"/>
     </v-flex>
     <LoadingCardDialog ref="loadingCardDialog" />
   </v-layout>
@@ -48,9 +48,9 @@
     watch: {
       hs(newvalue) {
         if(newvalue){
-          this.$refs.Addhs.geths(newvalue)
+          this.$refs.addhs.geths(newvalue)
         }else {
-          this.$refs.Addhs.$refs.form.reset()
+          this.$refs.addhs.$refs.form.reset()
         }
       }
     }
