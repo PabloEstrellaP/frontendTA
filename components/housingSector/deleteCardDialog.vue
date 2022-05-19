@@ -39,7 +39,7 @@
                 this.id = item._id
                 this.dialog = true
             },
-            async deleths() {
+            async deletehs() {
                 try {
                     
                     const data = await this.$axios.$delete('/housingSector/' + this.id, {

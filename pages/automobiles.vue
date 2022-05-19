@@ -22,7 +22,7 @@
     },
     data() {
       return {
-        it: null,
+        automobiles: null,
         isLoading: true
       }
     },
@@ -46,7 +46,7 @@
       }
     },
     watch: {
-      it(newvalue) {
+      automobiles(newvalue) {
         if(newvalue){
           this.$refs.addautoCard.getautomobiles(newvalue)
         }else {

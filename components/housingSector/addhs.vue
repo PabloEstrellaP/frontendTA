@@ -149,6 +149,7 @@
     },
     methods: {
       geths(data) {
+        console.log(data)
         this.isEdit = true
         this.model = data.model
         this.cost = data.cost
@@ -157,6 +158,7 @@
         this.responsableName = data.responsableName
         this.originalDate=data.originalDate
         this.id = data._id
+        
       },
       async addhs() {
         try {

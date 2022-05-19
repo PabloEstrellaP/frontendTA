@@ -42,7 +42,7 @@
             async deleteautomobiles() {
                 try {
                     
-                    const data = await this.$axios.$delete('/automobiles/' + this.id, {
+                    const data = await this.$axios.$delete('/automobile/' + this.id, {
                         headers: { token: localStorage.token }
                     })
                     
