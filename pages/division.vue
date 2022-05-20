@@ -76,7 +76,10 @@
       <v-card>
         <v-card-title>Heeeeeeey</v-card-title>
         <v-card-text>Hola Mundo</v-card-text>
-        <v-card-text>{{ dataForMoreInfo }}</v-card-text>
+        <v-card-text>{{dataForMoreInfo}}</v-card-text>
+        
+        <v-card-text> description : {{ getData(dataForMoreInfo, 'description') }}</v-card-text>
+        <v-card-text> Serial del motor : {{ getData(dataForMoreInfo, 'motorSerial') }}</v-card-text>
       </v-card>
     </v-dialog>
     <LoadingCardDialog ref="loadingCardDialog"/>
@@ -127,6 +130,14 @@
       }
     },
     methods: {
+      getData(data, type){
+        switch(type){
+          case 'description':
+            return data?.description
+          case 'motorSerial':
+            return data?.motorSerial
+        }
+      },
       getThings(type){
         switch(type){
           case 1:
