@@ -33,19 +33,18 @@
 
     <v-tabs-items v-model="tab">
       <v-tab-item>
-        <v-card
-          color="basil"
-          flat
-        >
-          <v-card-text>{{ 1+1 }} + {{tab}}</v-card-text>
-        </v-card>
+        <v-layout row wrap class="pa-5">
+          <v-icon @click="readMore = true, dataForMoreInfo = data" size="100" v-for="(data, index) in getThings(1)" :key="index + 'T'">mdi-laptop</v-icon>
+          <v-icon @click="readMore = true, dataForMoreInfo = data" size="100" v-for="(data, index) in getThings(2)" :key="index + 'A'">mdi-car</v-icon>
+          <v-icon @click="readMore = true, dataForMoreInfo = data" size="100" v-for="(data, index) in getThings(3)" :key="index + 'H'">mdi-contacts</v-icon>
+        </v-layout>
       </v-tab-item>
       <v-tab-item>
         <v-card
           flat
         >
           <v-card-text>
-            <AllCardDivisiones ref="allCardDivisiones" :division="division"/>
+            <AllCardDivisiones ref="allCardDivisiones" :division="division" :isEdit="isEdit"/>
           </v-card-text>
         </v-card>
       </v-tab-item>
@@ -73,6 +72,13 @@
         </v-card-text>
       </v-card>
     </v-dialog>
+    <v-dialog v-model="readMore" max-width="500">
+      <v-card>
+        <v-card-title>Heeeeeeey</v-card-title>
+        <v-card-text>Hola Mundo</v-card-text>
+        <v-card-text>{{ dataForMoreInfo }}</v-card-text>
+      </v-card>
+    </v-dialog>
     <LoadingCardDialog ref="loadingCardDialog"/>
     <ErrorDialog :errorDescription="errorDescription" :errorTitle="errorTitle" ref="errorDialog"/>
 
@@ -89,7 +95,7 @@
     components: {
       AllCardDivisiones,
       LoadingCardDialog,
-      ErrorDialog
+      ErrorDialog,
     },
     data() {
       return {
@@ -97,6 +103,11 @@
         errorDescription: null,
         isEdit: false,
         isAddNew: false,
+        isVisible: false,
+        readMore: false,
+        isIt: false,
+        isCar: false,
+        isHS: false,
         name: null,
         it: null,
         divisiones: [],
@@ -104,6 +115,7 @@
         division: [],
         isLoading: true,
         tab: null,
+        dataForMoreInfo: null,
         items: [
           'Division', 'Agregar',
         ],
@@ -115,6 +127,16 @@
       }
     },
     methods: {
+      getThings(type){
+        switch(type){
+          case 1:
+            return this.division?.IT
+          case 2:
+            return this.division?.automobile
+          case 3:
+            return this.division?.housingSector
+        }
+      },
       validate(){
         if(this.$refs.form.validate()){
           this.addDivision()
@@ -179,6 +201,8 @@
         this.openDialog()
         await this.getDivision()
         this.closeDialog()
+        const { id } = this.$route.query
+        this.divisionId = id 
         this.isLoading = false
       }
     },
@@ -188,7 +212,7 @@
           this.divisiones.forEach( x => {
             if(newvalue == x._id){
               this.division = x
-              this.isEdit = true
+              this.$router.push({path: this.$route.path, query: { id: this.divisionId }})
             }
           })
         }else {
@@ -196,6 +220,19 @@
           this.divisionId = null
           this.isEdit = false
         }
+      },
+      '$route.query'() {
+        this.isVisible = false
+        const { id } = this.$route.query
+        this.divisiones.forEach( x => {
+            if(id == x._id){
+              this.division = x
+              this.isEdit = true
+            }
+        })
+        setTimeout(() => {
+          this.isVisible = true
+        }, 1);
       }
     }
   }
