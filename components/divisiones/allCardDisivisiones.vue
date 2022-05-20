@@ -1,6 +1,6 @@
 <template>
     <v-layout row wrap justify-space-around>
-        <v-flex xs12 md6 @click="hola()">
+        <v-flex xs12 md6>
             <CardData :typeData="typeOfData[0]" :division="division" ref="divisionChange"/>
         </v-flex>
         <v-flex xs12 md6>
