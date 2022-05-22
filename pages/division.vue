@@ -74,8 +74,8 @@
     </v-dialog>
     <v-dialog v-model="readMore" max-width="500">
       <v-card>
-        <v-card-title>Heeeeeeey</v-card-title>
-        <v-card-text>Hola Mundo</v-card-text>
+        <v-card-title>Informacion de contenido</v-card-title>
+       
         
         
         <v-card-text> description : {{ getData(dataForMoreInfo, 'description') }}</v-card-text>
