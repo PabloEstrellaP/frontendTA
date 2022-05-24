@@ -74,12 +74,17 @@
     </v-dialog>
     <v-dialog v-model="readMore" max-width="500">
       <v-card>
-        <v-card-title>Heeeeeeey</v-card-title>
-        <v-card-text>Hola Mundo</v-card-text>
-        <v-card-text>{{dataForMoreInfo}}</v-card-text>
+        <v-card-title>Informacion de contenido</v-card-title>
+       
+        
         
         <v-card-text> description : {{ getData(dataForMoreInfo, 'description') }}</v-card-text>
         <v-card-text> Serial del motor : {{ getData(dataForMoreInfo, 'motorSerial') }}</v-card-text>
+        <v-card-text> serial : {{getData(dataForMoreInfo, 'serial')}}</v-card-text>
+        <v-card-text> costo: {{getData(dataForMoreInfo, 'cost')}}</v-card-text>
+        <v-card-text> Responsable: {{getData(dataForMoreInfo, 'responsableName')}}</v-card-text>
+        <v-card-text> Placas: {{getData(dataForMoreInfo, 'plaque')}}</v-card-text>
+
       </v-card>
     </v-dialog>
     <LoadingCardDialog ref="loadingCardDialog"/>
@@ -136,6 +141,14 @@
             return data?.description
           case 'motorSerial':
             return data?.motorSerial
+         case 'serial':
+           return data?.serial
+          case 'cost':
+            return data?.cost
+          case 'responsableName':
+            return data?.responsableName
+          case 'plaque':
+            return data?.plaque
         }
       },
       getThings(type){
