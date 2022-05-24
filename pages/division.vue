@@ -165,7 +165,6 @@
                   headers: { token: localStorage.getItem('token') }
               })
               this.divisiones = data.msg
-              console.log(data)
           } catch (error) {
               console.log(error.response)
           }

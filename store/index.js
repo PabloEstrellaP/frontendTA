@@ -1,3 +1,5 @@
+import { updatePermissions, getMenu } from '@/static/permissions.js'
+
 export const state = () => ({
     name: '',
     lastName: '',
@@ -7,17 +9,61 @@ export const state = () => ({
 
     selectedIts: [],
     selectedAutomobiles: [],
-    selectedHS: []
+    selectedHS: [],
+
+    permissionsFromBack: [],
+    userPermissions: [],
+
+    items: [
+      {
+        icon: 'mdi-apps',
+        title: 'Welcome',
+        to: '/'
+      },
+      {
+        icon: 'mdi-home',
+        title: 'División',
+        to: '/division'
+      },
+      {
+        icon: 'mdi-laptop',
+        title: 'Informática',
+        to: '/it'
+      },
+      {
+        icon: 'mdi-contacts',
+        title: 'Inmobiliaria',
+        to: '/housingSector'
+      },
+      {
+        icon: 'mdi-car',
+        title: 'Automóviles',
+        to: '/automobiles'
+      },
+      {
+        icon: 'mdi-account-circle',
+        title: 'Usuarios',
+        to: '/user'
+      }
+    ],
+    menu: []
 
   })
   
   export const mutations = {
+    getPermissions(state, data){
+      state.permissionsFromBack = data
+    },
     addData(state, data) {
-        state.name = data.personalData?.name
-        state.lastName = data.personalData?.lastName
-        state.rol = data.rol?.name
+      if(state.permissions != data.rol?.permissions){
+        state.userPermissions = updatePermissions(state, data)
+        state.menu = getMenu(state)
         state.permissions = data.rol?.permissions
-        state.userName = data.userName
+      }
+      state.name = data.personalData?.name
+      state.lastName = data.personalData?.lastName
+      state.rol = data.rol?.name
+      state.userName = data.userName
     },
     changeValues(state, data){
       switch(data.type){

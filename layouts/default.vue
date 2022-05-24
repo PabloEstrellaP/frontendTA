@@ -9,7 +9,7 @@
     >
       <v-list>
         <v-list-item
-          v-for="(item, i) in items"
+          v-for="(item, i) in menu"
           :key="i"
           :to="item.to"
           router
@@ -92,6 +92,8 @@
 
 <script>
   import Benchmark from '@/components/benchmark.vue'
+  import { getPermissions } from '@/static/permissions.js'
+  import { mapState } from 'vuex'
 export default {
   components: {
     Benchmark
@@ -102,43 +104,24 @@ export default {
       await this.$refs.benchmark.renovateToken()
     } 
   },
+  async created(){
+    if(process.browser){
+      await this.getPermissionsFromBack()
+      await this.$refs.benchmark.renovateToken()
+    }
+  },
+  methods: {
+    async getPermissionsFromBack(){
+      const data = await getPermissions()
+      this.$store.commit('getPermissions', data)
+    },
+  },
+  computed: mapState(['menu']), 
   data () {
     return {
       clipped: true,
       drawer: false,
       fixed: false,
-      items: [
-        {
-          icon: 'mdi-apps',
-          title: 'Welcome',
-          to: '/'
-        },
-        {
-          icon: 'mdi-home',
-          title: 'División',
-          to: '/division'
-        },
-        {
-          icon: 'mdi-laptop',
-          title: 'Informática',
-          to: '/it'
-        },
-        {
-          icon: 'mdi-contacts',
-          title: 'Inmobiliaria',
-          to: '/housingSector'
-        },
-        {
-          icon: 'mdi-car',
-          title: 'Automóviles',
-          to: '/automobiles'
-        },
-        {
-          icon: 'mdi-account-circle',
-          title: 'Usuarios',
-          to: '/user'
-        }
-      ],
       miniVariant: false,
       right: true,
       rightDrawer: false,
