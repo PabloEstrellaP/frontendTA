@@ -185,7 +185,7 @@
         this.serial = data.serial
         this.plaque= data.plaque
         this.responsableName = data.responsableName
-        this.originalDate=data.originalDate
+        this.originalDate= new Date(data.originalDate).toISOString().substring(0,10)
         this.id = data._id
       },
       async addautomobiles() {

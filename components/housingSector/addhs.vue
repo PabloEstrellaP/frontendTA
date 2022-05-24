@@ -70,7 +70,9 @@
         :max="(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)"
         min="1950-01-01"
         @change="save"
-      ></v-date-picker>
+        hint="MM/DD/YYYY format"
+      >
+      </v-date-picker>
     </v-menu>
   </div>
 
@@ -156,7 +158,7 @@
         this.description = data.description
         this.serial = data.serial
         this.responsableName = data.responsableName
-        this.originalDate=data.originalDate
+        this.originalDate= new Date(data.originalDate).toISOString().substring(0,10)
         this.id = data._id
         
       },
