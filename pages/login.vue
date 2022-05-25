@@ -1,7 +1,4 @@
 <template>
-  <!-- <v-layout row wrap justify-center justify="center" align="center">
-    <LoginCard ref="loginCard" />
-  </v-layout> -->
   <v-container fill-height fluid>
   <v-row align="center"
       justify="center">

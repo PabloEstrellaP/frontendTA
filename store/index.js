@@ -18,7 +18,7 @@ export const state = () => ({
     items: [
       {
         icon: 'mdi-apps',
-        title: 'Welcome',
+        title: 'Menú',
         to: '/'
       },
       {
