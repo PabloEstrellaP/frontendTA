@@ -23,6 +23,20 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
+      <v-list>
+        <v-list-item
+          @click="logOut()"
+          router
+          exact
+        >
+          <v-list-item-action>
+            <v-icon>mdi-logout</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title v-text="'Log Out'" />
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
     </v-navigation-drawer>
     <v-app-bar
       :clipped-left="clipped"
@@ -101,6 +115,7 @@ export default {
   name: 'DefaultLayout',
   watch: {
     async $route(to, from){
+      this.getPath(to.name)
       await this.$refs.benchmark.renovateToken()
     } 
   },
@@ -108,15 +123,50 @@ export default {
     if(process.browser){
       await this.getPermissionsFromBack()
       await this.$refs.benchmark.renovateToken()
+      this.getPath(this.$route.name)
     }
   },
   methods: {
+    logOut(){
+      this.$store.commit('isLoged', false)
+      localStorage.removeItem('token')
+      localStorage.removeItem('user')
+      localStorage.removeItem('isLoged')
+      this.$router.push({path: '/login'});
+    },
     async getPermissionsFromBack(){
       const data = await getPermissions()
       this.$store.commit('getPermissions', data)
     },
+    getPath(namePath){
+      switch(namePath){
+        case 'index':
+        break
+        case 'division':
+          this.getPermission(0)
+        break
+        case 'it':
+          this.getPermission(1)
+        break
+        case 'housingSector':
+          this.getPermission(2)
+        break
+        case 'automobiles':
+          this.getPermission(3)
+        break
+        case 'user':
+          this.getPermission(4)
+        break
+        default:
+          this.$router.push({path: '/error'})
+        break
+      }
+    },
+    getPermission(permission){
+      return this.userPermissions[permission] ? true : this.$router.push({path: '/error'})
+    }
   },
-  computed: mapState(['menu']), 
+  computed: mapState(['menu', 'userPermissions']),
   data () {
     return {
       clipped: true,

@@ -1,10 +1,10 @@
 <template>
-  <v-card elevation="20" min-width="700" class="justify-center">
+  <v-card elevation="20" :min-width="$vuetify.breakpoint.mobile ? 100 : 700" class="justify-center">
         <v-card-title>Iniciar sesión</v-card-title>
         <v-card-text>
              <v-layout row wrap class="pa-5">
-                <v-flex xs12 md6>
-                    
+                <v-flex xs12 md6 style="text-align: center;">
+                    <img src="/Logo.png" alt="Ayuntamiento de kanasín" :style="$vuetify.breakpoint.mobile ? 'width: 100%;' : 'width: 50%;'">
                 </v-flex>
                 <v-flex xs12 md6>
                     <v-form ref="form">

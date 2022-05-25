@@ -1,6 +1,7 @@
 import { updatePermissions, getMenu } from '@/static/permissions.js'
 
 export const state = () => ({
+    isLoged: false,
     name: '',
     lastName: '',
     rol: '',
@@ -51,6 +52,9 @@ export const state = () => ({
   })
   
   export const mutations = {
+    isLoged(state, loged){
+      state.isLoged = loged
+    },
     getPermissions(state, data){
       state.permissionsFromBack = data
     },

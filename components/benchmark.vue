@@ -21,13 +21,17 @@
                     const data = await this.$axios.$post('/auth/renovate', body)  
                     if(data.ok){
                         this.$store.commit('addData', data.user)
+                        this.$store.commit('isLoged', true)
                         localStorage.setItem('token', data.token)
                         localStorage.setItem('user', data.user)
+                        localStorage.setItem('isLoged', true)
                         if(this.$route.name == 'login')
                             this.$router.push({path: '/'});
                     }else{
+                        this.$store.commit('isLoged', false)
                         localStorage.removeItem('token')
                         localStorage.removeItem('user')
+                        localStorage.removeItem('isLoged')
                         this.$router.push({path: '/login'});
                     }
                         
