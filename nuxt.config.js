@@ -52,8 +52,8 @@ export default {
   },
   pwa: {
     meta : {
-      title : 'Ayuntamiendo de Kanasín',
-      author : 'Ayuntamiendo de Kanasín',
+      title : 'Ayuntamiento de Kanasín',
+      author : 'Ayuntamiento de Kanasín',
       // "apple-mobile-web-app-capable" : true,
     },
     manifest: {
