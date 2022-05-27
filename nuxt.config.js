@@ -35,6 +35,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+    '@nuxtjs/pwa'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -48,6 +49,24 @@ export default {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
     baseURL: 'https://backendtatec.herokuapp.com/api/'
     // baseURL: 'http://192.168.1.64:8120/api'
+  },
+  pwa: {
+    meta : {
+      title : 'Ayuntamiendo de Kanasín',
+      author : 'Ayuntamiendo de Kanasín',
+      // "apple-mobile-web-app-capable" : true,
+    },
+    manifest: {
+      name: 'AyuntamiendoDeKanasín',
+      short_name: 'Ayuntamiendo de Kanasín',
+      lang: 'es',
+      display: 'standalone',
+
+    },
+    icon : {
+      fileName : 'Logo.png',
+      sizes : [64, 120, 144, 152, 192, 384, 512, 1024],
+    }
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
