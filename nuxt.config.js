@@ -57,7 +57,7 @@ export default {
       // "apple-mobile-web-app-capable" : true,
     },
     manifest: {
-      name: 'AyuntamiendoDeKanasín',
+      name: 'Ayuntamiento de Kanasín',
       short_name: 'Ayuntamiendo de Kanasín',
       lang: 'es',
       display: 'standalone',
