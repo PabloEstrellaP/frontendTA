@@ -1,3 +1,3 @@
 export const constants = {
-    path: 'http://localhost:8120/api'
+    path: 'https://backendtatec.herokuapp.com/api'
 }

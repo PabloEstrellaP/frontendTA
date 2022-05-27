@@ -32,6 +32,7 @@
                         localStorage.removeItem('token')
                         localStorage.removeItem('user')
                         localStorage.removeItem('isLoged')
+                        localStorage.setItem('isLoged', false)
                         this.$router.push({path: '/login'});
                     }
                         
@@ -39,6 +40,9 @@
                     console.log(error)
                     localStorage.removeItem('token')
                     localStorage.removeItem('user')
+                    localStorage.removeItem('isLoged')
+                    localStorage.setItem('isLoged', false)
+
                     this.$router.push({path: '/login'});
                 }
             }
